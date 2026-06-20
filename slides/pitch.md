@@ -5,7 +5,7 @@ transition: fade
 auto-advance: 20
 ---
 
-<!--Sldie 1-->
+<!--Slide 1-->
 # Income/Expense Manage App
 #### React + Vite · Supabase · Claude Code · MCP · AI Agent
 
@@ -19,7 +19,7 @@ auto-advance: 20
 
 ---
 
-<!--Sldie 2-->
+<!--slide 2-->
 # What Happens Without Tracking?
 - Money Leaks: Small, unmonitored expenses add up to significant losses.
 - Financial Stress: Uncertainty about your balance creates constant anxiety.
@@ -29,7 +29,7 @@ auto-advance: 20
 ---
 
 
-<!--Slide 3 -->
+<!--slide 3 -->
 ## Why Use App
 ### Smart Tracking
 - Digital tracking replaces mental guesswork. By logging expenses on your smartphone, you create a permanent record that empowers smarter financial decisions daily.
@@ -53,7 +53,7 @@ AI Coder Supabase MCP
 (20 seconds)
 ---
 
-<!--Slide 5 -->
+<!--slide 5 -->
 ## How I built it
 ## MCP, SKills, Agents
 ### MCP
@@ -81,7 +81,7 @@ AI Coder Supabase MCP
 
 ---
 
-<!--Slide 6 -->
+<!--slide 6 -->
 # Conclusion
 # Done checklist
 - [x] **Repo public** — [https://github.com/naitar/income-expense-app]
