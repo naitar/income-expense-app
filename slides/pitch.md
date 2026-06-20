@@ -24,7 +24,7 @@ auto-advance: 20
 - Money Leaks: Small, unmonitored expenses add up to significant losses.
 - Financial Stress: Uncertainty about your balance creates constant anxiety.
 - Debt Risk: Without oversight, overspending becomes a dangerous cycle.
-- 
+
 (20 seconds)
 ---
 
@@ -45,9 +45,9 @@ auto-advance: 20
 - 🔐 Supabase Auth — email + Google OAuth
 - 🤖 AI Financial Advisor — Myanmar language insights
 - 📁 Monthly report + CSV export
-(20 seconds)
 
-## Architecture
+
+### Architecture
 Claude Code + MCP
 AI Coder Supabase MCP
 (20 seconds)
