@@ -4,6 +4,7 @@ import { Card, Button } from '@/components/ui'
 import TransactionList from '@/components/transactions/TransactionList'
 import TransactionForm from '@/components/transactions/TransactionForm'
 import TransactionFilter from '@/components/transactions/TransactionFilter'
+import ExportButton from '@/components/reports/ExportButton'
 
 function Transactions() {
   const {
@@ -76,12 +77,15 @@ function Transactions() {
             {transactions.length} transaction{transactions.length !== 1 ? 's' : ''}
           </p>
         </div>
-        <Button variant="primary" onClick={handleAdd} className="flex-shrink-0">
-          <svg className="w-5 h-5 sm:mr-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
-          <span className="hidden sm:inline">Add Transaction</span>
-        </Button>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <ExportButton transactions={filteredTransactions} />
+          <Button variant="primary" onClick={handleAdd}>
+            <svg className="w-5 h-5 sm:mr-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span className="hidden sm:inline">Add Transaction</span>
+          </Button>
+        </div>
       </div>
 
       {/* Schema migration hint */}
