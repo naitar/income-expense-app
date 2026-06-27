@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import useCategories from '@/hooks/useCategories'
-import { Card, Button, Input, Modal } from '@/components/ui'
+import { Card, Button, Input, Modal, LoadingSpinner, EmptyState } from '@/components/ui'
 
 // Quick color palette for the picker
 const COLORS = [
@@ -93,8 +93,8 @@ function Categories() {
     <div className="space-y-6 max-w-2xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">အမျိုးအစားများ</h1>
-          <p className="text-gray-500 mt-1">ဝင်ငွေ နှင့် အသုံး အမျိုးအစားများ စီမံရန်</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">အမျိုးအစားများ</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">ဝင်ငွေ နှင့် အသုံး အမျိုးအစားများ စီမံရန်</p>
         </div>
         <Button variant="primary" size="sm" onClick={() => openCatForm(null)}>
           + အသစ်ထည့်မည်
@@ -105,10 +105,15 @@ function Categories() {
         {/* Income Categories */}
         <Card title="📥 ဝင်ငွေ" subtitle={incomeCats.length > 0 ? `${incomeCats.length} ခု` : undefined}>
           {incomeCats.length === 0 && !loading && (
-            <p className="text-sm text-gray-400 text-center py-4">မရှိသေးပါ</p>
+            <EmptyState
+              icon="📥"
+              title="ဝင်ငွေ အမျိုးအစား မရှိသေးပါ"
+              description="ဝင်ငွေ အမျိုးအစားအသစ် ထည့်ပါ။"
+              size="sm"
+            />
           )}
           {incomeCats.length > 0 && (
-            <div className="-mx-6 -my-5 divide-y divide-gray-50">
+            <div className="-mx-6 -my-5 divide-y divide-gray-50 dark:divide-gray-700">
               {incomeCats.map((cat) => (
                 <CategoryRow
                   key={cat.id}
@@ -124,10 +129,15 @@ function Categories() {
         {/* Expense Categories */}
         <Card title="📤 အသုံး" subtitle={expenseCats.length > 0 ? `${expenseCats.length} ခု` : undefined}>
           {expenseCats.length === 0 && !loading && (
-            <p className="text-sm text-gray-400 text-center py-4">မရှိသေးပါ</p>
+            <EmptyState
+              icon="📤"
+              title="အသုံး အမျိုးအစား မရှိသေးပါ"
+              description="အသုံး အမျိုးအစားအသစ် ထည့်ပါ။"
+              size="sm"
+            />
           )}
           {expenseCats.length > 0 && (
-            <div className="-mx-6 -my-5 divide-y divide-gray-50">
+            <div className="-mx-6 -my-5 divide-y divide-gray-50 dark:divide-gray-700">
               {expenseCats.map((cat) => (
                 <CategoryRow
                   key={cat.id}
@@ -142,13 +152,7 @@ function Categories() {
       </div>
 
       {loading && (
-        <div className="flex items-center gap-2 text-sm text-gray-400 py-2">
-          <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-          </svg>
-          စောင့်ပါ...
-        </div>
+        <LoadingSpinner size="sm" text="စောင့်ပါ..." />
       )}
 
       {/* ── Category Modal ───────────────────────────────────── */}
@@ -159,7 +163,7 @@ function Categories() {
         size="sm"
       >
         {catError && (
-          <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700">
+          <div className="mb-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 text-sm text-red-700 dark:text-red-400">
             {catError}
           </div>
         )}
@@ -174,8 +178,8 @@ function Categories() {
 
           {/* Type toggle */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">အမျိုးအစား</label>
-            <div className="flex rounded-lg border border-gray-200 p-1 bg-gray-50">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">အမျိုးအစား</label>
+            <div className="flex rounded-lg border border-gray-200 dark:border-gray-600 p-1 bg-gray-50 dark:bg-gray-700">
               {['expense', 'income'].map((t) => (
                 <button
                   key={t}
@@ -240,18 +244,18 @@ function Categories() {
 
 function CategoryRow({ cat, onEdit, onDelete }) {
   return (
-    <div className="flex items-center justify-between px-6 py-3 hover:bg-gray-50 group transition-colors">
+    <div className="flex items-center justify-between px-6 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 group transition-colors">
       <div className="flex items-center gap-3">
         <span
           className="w-3 h-3 rounded-full flex-shrink-0"
           style={{ backgroundColor: cat.color }}
         />
-        <span className="text-sm text-gray-900">{cat.name}</span>
+        <span className="text-sm text-gray-900 dark:text-white">{cat.name}</span>
       </div>
       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
           onClick={onEdit}
-          className="p-1 text-gray-400 hover:text-blue-600 rounded transition-colors"
+          className="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 rounded transition-colors"
           title="ပြင်ဆင်ရန်"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -260,7 +264,7 @@ function CategoryRow({ cat, onEdit, onDelete }) {
         </button>
         <button
           onClick={onDelete}
-          className="p-1 text-gray-400 hover:text-red-600 rounded transition-colors"
+          className="p-1 text-gray-400 hover:text-red-600 dark:hover:text-red-400 rounded transition-colors"
           title="ဖျက်ရန်"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

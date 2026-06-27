@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/store/AuthContext'
+import { useTheme } from '@/store/ThemeContext'
 
 const links = [
   {
@@ -52,9 +53,28 @@ const links = [
   },
 ]
 
+// Sun icon
+function SunIcon({ className }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+    </svg>
+  )
+}
+
+// Moon icon
+function MoonIcon({ className }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+    </svg>
+  )
+}
+
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false)
   const { user, signOut } = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
 
   async function handleLogout() {
@@ -67,7 +87,7 @@ function Sidebar() {
       {/* Mobile toggle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white shadow-md text-gray-600 hover:text-gray-900"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white dark:bg-gray-800 shadow-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
       >
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           {isOpen ? (
@@ -90,18 +110,18 @@ function Sidebar() {
       <aside
         className={`
           fixed lg:sticky top-0 left-0 z-40
-          h-screen w-60 bg-white border-r border-gray-100
+          h-screen w-60 bg-white dark:bg-gray-800 border-r border-gray-100 dark:border-gray-700
           flex flex-col
           transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3 px-6 h-16 border-b border-gray-100">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-income to-emerald-600 text-white font-bold text-sm">
+        <div className="flex items-center gap-3 px-6 h-16 border-b border-gray-100 dark:border-gray-700">
+          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-income to-income text-white font-bold text-sm shadow-sm">
             IE
           </div>
-          <span className="font-semibold text-gray-900">Income Expense</span>
+          <span className="font-semibold text-gray-900 dark:text-white">Income Expense</span>
         </div>
 
         {/* Nav links */}
@@ -115,8 +135,8 @@ function Sidebar() {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400'
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white'
                 }`
               }
             >
@@ -126,20 +146,39 @@ function Sidebar() {
           ))}
         </nav>
 
-        {/* User + Logout */}
-        <div className="border-t border-gray-100">
+        {/* User + Theme toggle + Logout */}
+        <div className="border-t border-gray-100 dark:border-gray-700">
           {user && (
             <div className="px-4 py-3">
-              <p className="text-sm font-medium text-gray-900 truncate">
+              <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                 {user.user_metadata?.full_name || user.email}
               </p>
-              <p className="text-xs text-gray-400 truncate">{user.email}</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 truncate">{user.email}</p>
             </div>
           )}
-          <div className="px-3 pb-3">
+          <div className="px-3 pb-3 space-y-1">
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-2 w-full px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-lg transition-colors"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <SunIcon className="w-4 h-4" />
+                  Light Mode
+                </>
+              ) : (
+                <>
+                  <MoonIcon className="w-4 h-4" />
+                  Dark Mode
+                </>
+              )}
+            </button>
+
+            {/* Logout */}
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 w-full px-3 py-2 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+              className="flex items-center gap-2 w-full px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />

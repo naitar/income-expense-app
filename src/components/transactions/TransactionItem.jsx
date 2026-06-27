@@ -26,30 +26,30 @@ function TransactionItem({ transaction, onEdit, onDelete }) {
   }
 
   return (
-    <div className="flex items-center gap-2 sm:gap-4 px-3 sm:px-4 py-3 hover:bg-gray-50 transition-colors group">
+    <div className="flex items-center gap-2 sm:gap-4 px-3 sm:px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group">
       {/* Icon — hide on very small screens */}
-      <div className="hidden sm:flex flex-shrink-0 w-10 h-10 rounded-full bg-gray-100 items-center justify-center text-lg">
+      <div className="hidden sm:flex flex-shrink-0 w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 items-center justify-center text-lg">
         {icon}
       </div>
 
       {/* Details */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <p className="text-sm font-medium text-gray-900 truncate">
+          <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
             {description || category}
           </p>
           <span
             className={`hidden sm:inline flex-shrink-0 text-xs font-medium px-1.5 py-0.5 rounded ${
               type === 'income'
-                ? 'bg-green-50 text-income'
-                : 'bg-red-50 text-expense'
+                ? 'bg-green-50 dark:bg-green-900/30 text-income'
+                : 'bg-red-50 dark:bg-red-900/30 text-expense'
             }`}
           >
             {category}
           </span>
         </div>
-        <p className="text-xs text-gray-400 mt-0.5">
-          <span className="sm:hidden text-gray-500 font-medium">{category}</span>
+        <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+          <span className="sm:hidden text-gray-500 dark:text-gray-400 font-medium">{category}</span>
           <span className="sm:hidden mx-1.5">·</span>
           {formatDate(date)}
         </p>
@@ -70,7 +70,7 @@ function TransactionItem({ transaction, onEdit, onDelete }) {
       <div className="flex-shrink-0 flex items-center gap-0.5 sm:gap-1 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
         <button
           onClick={() => onEdit(transaction)}
-          className="p-1 sm:p-1.5 text-gray-400 hover:text-blue-600 rounded transition-colors"
+          className="p-1 sm:p-1.5 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 rounded transition-colors"
           title="Edit"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -79,7 +79,7 @@ function TransactionItem({ transaction, onEdit, onDelete }) {
         </button>
         <button
           onClick={handleDelete}
-          className="p-1 sm:p-1.5 text-gray-400 hover:text-red-600 rounded transition-colors"
+          className="p-1 sm:p-1.5 text-gray-400 hover:text-red-600 dark:hover:text-red-400 rounded transition-colors"
           title="Delete"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

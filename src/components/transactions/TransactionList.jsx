@@ -1,17 +1,15 @@
 import TransactionItem from './TransactionItem'
+import { EmptyState } from '@/components/ui'
 
 function TransactionList({ transactions, onEdit, onDelete }) {
   if (!transactions || transactions.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-3xl mb-4">
-          📋
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-1">No transactions yet</h3>
-        <p className="text-sm text-gray-500 max-w-xs">
-          Click the &quot;Add Transaction&quot; button above to start tracking your income and expenses.
-        </p>
-      </div>
+      <EmptyState
+        icon="📋"
+        title="ငွေလွှဲမှတ်တမ်း မရှိသေးပါ"
+        description="အပေါ်ရှိ &quot;အသစ်ထည့်ရန်&quot ခလုတ်ကို နှိပ်ပြီး ဝင်ငွေ နှင့် အသုံးစာရင်း စတင်မှတ်တမ်းတင်ပါ။"
+        size="lg"
+      />
     )
   }
 

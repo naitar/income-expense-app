@@ -62,12 +62,12 @@ function TransactionForm({ isOpen, onClose, onSubmit, editTransaction }) {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={isEdit ? 'Edit Transaction' : 'Add Transaction'}>
+    <Modal isOpen={isOpen} onClose={onClose} title={isEdit ? 'ပြင်ဆင်ရန်' : 'အသစ်ထည့်ရန်'}>
       <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-5">
         {/* Type toggle */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
-          <div className="flex rounded-lg border border-gray-200 p-1 bg-gray-50">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">အမျိုးအစား</label>
+          <div className="flex rounded-lg border border-gray-200 dark:border-gray-600 p-1 bg-gray-50 dark:bg-gray-700">
             <button
               type="button"
               onClick={() => {
@@ -77,10 +77,10 @@ function TransactionForm({ isOpen, onClose, onSubmit, editTransaction }) {
               className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${
                 selectedType === 'expense'
                   ? 'bg-expense text-white shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
               }`}
             >
-              Expense
+              အသုံး
             </button>
             <button
               type="button"
@@ -91,10 +91,10 @@ function TransactionForm({ isOpen, onClose, onSubmit, editTransaction }) {
               className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${
                 selectedType === 'income'
                   ? 'bg-income text-white shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
               }`}
             >
-              Income
+              ဝင်ငွေ
             </button>
           </div>
           <input type="hidden" {...register('type', { required: true })} />
@@ -102,65 +102,65 @@ function TransactionForm({ isOpen, onClose, onSubmit, editTransaction }) {
 
         {/* Amount */}
         <Input
-          label="Amount"
+          label="ငွေပမာဏ"
           type="number"
           step="1"
           min="1"
-          placeholder="Enter amount"
+          placeholder="ငွေပမာဏ ထည့်ပါ"
           error={errors.amount?.message}
           {...register('amount', {
-            required: 'Amount is required',
-            min: { value: 1, message: 'Must be at least 1' },
+            required: 'ငွေပမာဏ ထည့်ပါ။',
+            min: { value: 1, message: 'အနည်းဆုံး ၁ ဖြစ်ရပါမည်။' },
             valueAsNumber: false,
           })}
         />
 
         {/* Category */}
         <div className="w-full overflow-hidden">
-          <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
-            Category
+          <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            အမျိုးအစား
           </label>
           <select
             id="category"
-            className={`w-full max-w-full px-3 py-2 text-sm border rounded-lg text-gray-900 bg-white
+            className={`w-full max-w-full px-3 py-2 text-sm border rounded-lg text-gray-900 dark:text-white bg-white dark:bg-gray-700
               truncate
               focus:outline-none focus:ring-2 focus:ring-offset-0 transition-colors
               ${errors.category
-                ? 'border-red-300 focus:ring-red-500'
-                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+                ? 'border-red-300 dark:border-red-500 focus:ring-red-500'
+                : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500'
               }`}
-            {...register('category', { required: 'Category is required' })}
+            {...register('category', { required: 'အမျိုးအစား ရွေးပါ။' })}
           >
-            <option value="">Select a category</option>
+            <option value="">အမျိုးအစား ရွေးပါ</option>
             {filteredCategories.map((cat) => (
               <option key={cat.id} value={cat.name}>{cat.name}</option>
             ))}
           </select>
           {errors.category && (
-            <p className="mt-1 text-sm text-red-600">{errors.category.message}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.category.message}</p>
           )}
         </div>
 
         {/* Description */}
         <Input
-          label="Description"
-          placeholder="What was this for? (optional)"
+          label="မှတ်ချက်"
+          placeholder="ဘာအတွက်လဲ? (ရှိလျှင်)"
           error={errors.description?.message}
           {...register('description')}
         />
 
         {/* Date */}
         <Input
-          label="Date"
+          label="ရက်စွဲ"
           type="date"
           error={errors.date?.message}
-          {...register('date', { required: 'Date is required' })}
+          {...register('date', { required: 'ရက်စွဲ ထည့်ပါ။' })}
         />
 
         {/* Actions */}
         <div className="flex gap-3 pt-2">
           <Button type="button" variant="ghost" onClick={onClose} className="flex-1">
-            Cancel
+            မလုပ်တော့
           </Button>
           <Button
             type="submit"
@@ -168,7 +168,7 @@ function TransactionForm({ isOpen, onClose, onSubmit, editTransaction }) {
             loading={isSubmitting}
             className="flex-1"
           >
-            {isEdit ? 'Save Changes' : 'Add Transaction'}
+            {isEdit ? 'သိမ်းဆည်းမည်' : 'ထည့်မည်'}
           </Button>
         </div>
       </form>

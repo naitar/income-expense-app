@@ -1,6 +1,6 @@
-import { CATEGORIES } from '@/utils/format'
+function TransactionFilter({ filters, onFilterChange, categories = [] }) {
+  const hasActiveFilters = filters.search || filters.type !== 'all' || filters.category !== 'all'
 
-function TransactionFilter({ filters, onFilterChange }) {
   return (
     <div className="flex flex-col sm:flex-row gap-3">
       {/* Search */}
@@ -16,12 +16,13 @@ function TransactionFilter({ filters, onFilterChange }) {
         </svg>
         <input
           type="text"
-          placeholder="Search transactions..."
+          placeholder="ရှာဖွေရန်..."
           value={filters.search}
           onChange={(e) => onFilterChange({ ...filters, search: e.target.value })}
-          className="w-full pl-10 pr-3 py-2 text-sm border border-gray-200 rounded-lg
+          className="w-full pl-10 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg
+            bg-white dark:bg-gray-700 text-gray-900 dark:text-white
             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-            placeholder:text-gray-400"
+            placeholder:text-gray-400 dark:placeholder:text-gray-500"
         />
       </div>
 
@@ -31,28 +32,43 @@ function TransactionFilter({ filters, onFilterChange }) {
         <select
           value={filters.type}
           onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
-          className="flex-1 sm:flex-none px-3 py-2 text-sm border border-gray-200 rounded-lg bg-white
+          className="flex-1 sm:flex-none px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg
+            bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300
             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-            text-gray-700 min-w-0"
+            min-w-0"
         >
-          <option value="all">All Types</option>
-          <option value="income">Income</option>
-          <option value="expense">Expense</option>
+          <option value="all">အမျိုးအစားအားလုံး</option>
+          <option value="income">ဝင်ငွေ</option>
+          <option value="expense">အသုံး</option>
         </select>
 
         {/* Category filter */}
         <select
           value={filters.category}
           onChange={(e) => onFilterChange({ ...filters, category: e.target.value })}
-          className="flex-1 sm:flex-none px-3 py-2 text-sm border border-gray-200 rounded-lg bg-white
+          className="flex-1 sm:flex-none px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg
+            bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300
             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-            text-gray-700 min-w-0"
+            min-w-0"
         >
-          <option value="all">All Categories</option>
-          {CATEGORIES.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
+          <option value="all">အမျိုးအစားအားလုံး</option>
+          {categories.map((cat) => (
+            <option key={cat.id || cat.name} value={cat.name}>{cat.name}</option>
           ))}
         </select>
+
+        {/* Clear filters */}
+        {hasActiveFilters && (
+          <button
+            onClick={() => onFilterChange({ search: '', type: 'all', category: 'all' })}
+            className="flex items-center gap-1 px-3 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <span className="hidden sm:inline">ဖျက်ရန်</span>
+          </button>
+        )}
       </div>
     </div>
   )

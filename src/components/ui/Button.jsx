@@ -8,9 +8,9 @@ const variants = {
   expense:
     'bg-expense text-white hover:bg-red-600 focus:ring-expense',
   ghost:
-    'bg-transparent text-gray-600 hover:bg-gray-100 focus:ring-gray-400',
+    'bg-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-gray-400',
   outline:
-    'border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-gray-400',
+    'border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:ring-gray-400',
 }
 
 const sizes = {

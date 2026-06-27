@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import useTransactions from '@/hooks/useTransactions'
 import useCategories from '@/hooks/useCategories'
-import { Card } from '@/components/ui'
+import { Card, LoadingSpinner, EmptyState } from '@/components/ui'
 import { formatCurrency } from '@/utils/format'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -22,7 +22,7 @@ const PIE_COLORS = [
 const MM_MONTHS = ['ဇန်', 'ဖေ', 'မတ်', 'ဧပြီ', 'မေ', 'ဇွန်', 'ဇူ', 'သြ', 'စက်', 'အောက်', 'နို', 'ဒီ']
 
 function Reports() {
-  const { transactions, fetchTransactions } = useTransactions()
+  const { transactions, loading, fetchTransactions } = useTransactions()
   const { categories } = useCategories()
 
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
@@ -114,13 +114,13 @@ function Reports() {
   function CustomTooltip({ active, payload, label }) {
     if (!active || !payload?.length) return null
     return (
-      <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-sm">
-        <p className="font-semibold text-gray-900 mb-1">{label}</p>
+      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg p-3 text-sm">
+        <p className="font-semibold text-gray-900 dark:text-white mb-1">{label}</p>
         {payload.map((entry, i) => (
           <div key={i} className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: entry.color }} />
-            <span className="text-gray-600">{entry.name}:</span>
-            <span className="font-medium text-gray-900">{formatCurrency(entry.value)}</span>
+            <span className="text-gray-600 dark:text-gray-400">{entry.name}:</span>
+            <span className="font-medium text-gray-900 dark:text-white">{formatCurrency(entry.value)}</span>
           </div>
         ))}
       </div>
@@ -132,48 +132,52 @@ function Reports() {
     if (!active || !payload?.length) return null
     const d = payload[0]
     return (
-      <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-2.5 text-sm">
+      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg p-2.5 text-sm">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: d.payload.fill }} />
-          <span className="text-gray-600">{d.name}:</span>
-          <span className="font-medium text-gray-900">{formatCurrency(d.value)}</span>
+          <span className="text-gray-600 dark:text-gray-400">{d.name}:</span>
+          <span className="font-medium text-gray-900 dark:text-white">{formatCurrency(d.value)}</span>
         </div>
       </div>
     )
   }
 
+  if (loading && transactions.length === 0) {
+    return <LoadingSpinner fullPage text="ခေတ္တစောင့်ပါ..." />
+  }
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">အစီရင်ခံစာ</h1>
-        <p className="text-gray-500 mt-1">ဝင်ငွေ နှင့် အသုံးစာရင်း ကိန်းဂဏန်းများ</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">အစီရင်ခံစာ</h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-1">ဝင်ငွေ နှင့် အသုံးစာရင်း ကိန်းဂဏန်းများ</p>
       </div>
 
       {/* ── Summary cards ────────────────────────────────────── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-lg">📥</div>
+            <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-lg">📥</div>
             <div>
-              <p className="text-sm text-gray-500">စုစုပေါင်း ဝင်ငွေ</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">စုစုပေါင်း ဝင်ငွေ</p>
               <p className="text-2xl font-bold text-income">{formatCurrency(totals.income)}</p>
             </div>
           </div>
         </Card>
         <Card>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-lg">📤</div>
+            <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-lg">📤</div>
             <div>
-              <p className="text-sm text-gray-500">စုစုပေါင်း အသုံး</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">စုစုပေါင်း အသုံး</p>
               <p className="text-2xl font-bold text-expense">{formatCurrency(totals.expense)}</p>
             </div>
           </div>
         </Card>
         <Card>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-lg">💰</div>
+            <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-lg">💰</div>
             <div>
-              <p className="text-sm text-gray-500">လက်ကျန်</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">လက်ကျန်</p>
               <p className={`text-2xl font-bold ${totals.balance >= 0 ? 'text-income' : 'text-expense'}`}>
                 {formatCurrency(totals.balance)}
               </p>
@@ -193,8 +197,8 @@ function Reports() {
                 onClick={() => setSelectedYear(y)}
                 className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
                   y === selectedYear
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-500 hover:bg-gray-100'
+                    ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400'
+                    : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
               >
                 {y}
@@ -260,9 +264,9 @@ function Reports() {
                     layout="vertical"
                     align="right"
                     verticalAlign="middle"
-                    wrapperStyle={{ fontSize: 12 }}
+                    wrapperStyle={{ fontSize: 12, maxWidth: '40%', wordBreak: 'break-word' }}
                     formatter={(value) => (
-                      <span className="text-gray-700">{value}</span>
+                      <span className="text-gray-700 dark:text-gray-300 text-xs">{value}</span>
                     )}
                   />
                 </PieChart>
@@ -298,9 +302,9 @@ function Reports() {
                     layout="vertical"
                     align="right"
                     verticalAlign="middle"
-                    wrapperStyle={{ fontSize: 12 }}
+                    wrapperStyle={{ fontSize: 12, maxWidth: '40%', wordBreak: 'break-word' }}
                     formatter={(value) => (
-                      <span className="text-gray-700">{value}</span>
+                      <span className="text-gray-700 dark:text-gray-300 text-xs">{value}</span>
                     )}
                   />
                 </PieChart>
@@ -317,10 +321,11 @@ function Reports() {
 
 function EmptyChart({ text }) {
   return (
-    <div className="flex flex-col items-center justify-center h-48 text-center">
-      <div className="text-3xl mb-2">📊</div>
-      <p className="text-sm text-gray-400 max-w-xs">{text}</p>
-    </div>
+    <EmptyState
+      icon="📊"
+      title={text}
+      size="sm"
+    />
   )
 }
 

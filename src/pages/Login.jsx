@@ -145,36 +145,36 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-income to-emerald-600 text-white font-bold text-lg mb-3">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-income to-income text-white font-bold text-xl mb-4 shadow-lg shadow-green-200 dark:shadow-green-900/30">
             IE
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Income Expense</h1>
-          <p className="text-sm text-gray-500 mt-1">ဝင်ငွေ / အသုံးစာရင်း မှတ်တမ်း</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Income Expense</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">ဝင်ငွေ / အသုံးစာရင်း မှတ်တမ်း</p>
         </div>
 
         <Card>
           {/* Tabs */}
-          <div className="flex border-b border-gray-100 -mx-6 -mt-5 mb-5">
+          <div className="flex border-b border-gray-100 dark:border-gray-700 -mx-6 -mt-5 mb-6">
             <button
               onClick={() => { setTab('login'); setServerError(''); setServerSuccess(''); setCooldown(0) }}
-              className={`flex-1 py-3 text-sm font-medium text-center transition-colors ${
+              className={`flex-1 py-3.5 text-sm font-medium text-center transition-colors ${
                 tab === 'login'
                   ? 'text-blue-600 border-b-2 border-blue-600'
-                  : 'text-gray-500 hover:text-gray-700'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
               }`}
             >
               ဝင်ရန်
             </button>
             <button
               onClick={() => { setTab('register'); setServerError(''); setServerSuccess(''); setCooldown(0) }}
-              className={`flex-1 py-3 text-sm font-medium text-center transition-colors ${
+              className={`flex-1 py-3.5 text-sm font-medium text-center transition-colors ${
                 tab === 'register'
                   ? 'text-blue-600 border-b-2 border-blue-600'
-                  : 'text-gray-500 hover:text-gray-700'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
               }`}
             >
               မှတ်ပုံတင်ရန်
@@ -183,14 +183,14 @@ function Login() {
 
           {/* Server error */}
           {serverError && (
-            <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700">
+            <div className="mb-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 text-sm text-red-700 dark:text-red-400">
               {serverError}
             </div>
           )}
 
           {/* Server success */}
           {serverSuccess && (
-            <div className="mb-4 p-3 rounded-lg bg-green-50 border border-green-200 text-sm text-green-700">
+            <div className="mb-4 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 text-sm text-green-700 dark:text-green-400">
               {serverSuccess}
             </div>
           )}
@@ -283,7 +283,7 @@ function Login() {
           )}
         </Card>
 
-        <p className="text-center text-xs text-gray-400 mt-6">
+        <p className="text-center text-xs text-gray-400 dark:text-gray-600 mt-6">
           Income Expense App v1.0
         </p>
       </div>
