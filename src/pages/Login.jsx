@@ -149,9 +149,7 @@ function Login() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-income to-income text-white font-bold text-xl mb-4 shadow-lg shadow-green-200 dark:shadow-green-900/30">
-            IE
-          </div>
+          <img src="/logo192.png" alt="Logo" className="inline-flex w-16 h-16 rounded-2xl mb-4 shadow-lg shadow-green-200 dark:shadow-green-900/30" />
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Income Expense</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">ဝင်ငွေ / အသုံးစာရင်း မှတ်တမ်း</p>
         </div>

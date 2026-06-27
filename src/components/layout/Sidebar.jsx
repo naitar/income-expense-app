@@ -118,9 +118,7 @@ function Sidebar() {
       >
         {/* Logo */}
         <div className="flex items-center gap-3 px-6 h-16 border-b border-gray-100 dark:border-gray-700">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-income to-income text-white font-bold text-sm shadow-sm">
-            IE
-          </div>
+          <img src="/favicon-32.png" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm flex-shrink-0" />
           <span className="font-semibold text-gray-900 dark:text-white">Income Expense</span>
         </div>
 
