@@ -52,8 +52,8 @@ Track your income and expenses in MMK to effectively manage your personal financ
 ---
 ## User Guide 
 
-### ![User Guide Link](./userguide.html)
-### ![PDF Download Link](./userguide.pdf)
+### [User Guide Link](./userguide.html)
+### [PDF Download Link](./userguide.pdf)
 
 ---
 ## 🛠️ Tech Stack
