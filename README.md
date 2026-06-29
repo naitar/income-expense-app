@@ -1,9 +1,14 @@
 # 💰 ဝင်ငွေ / ထွက်ငွေ စီမံခန့်ခွဲမှု App
 
-မြန်မာကျပ်ငွေ (MMK) ဖြင့် ဝင်ငွေ/ထွက်ငွေ မှတ်တမ်းတင်ပြီး  
+[mmbalance app web site link](https://mmbalance.vercel.app/)
+
+မြန်မာကျပ်ငွေ (MMK) ဖြင့် ဝင်ငွေ/ထွက်ငွေ မှတ်တမ်းတင်ပြီး  မိမိ၏ဝင်ငွေကို စီမံခန့်ခွဲနိုင်ပါသည်။
+Track your income and expenses in MMK to effectively manage your personal finances.
 
 **next feature**
-- AI Financial Advisor ၏ မြန်မာဘာသာ insight တွေ ရယူနိုင်သော web application။
+- mobile app
+- AI Financial Advisor ၏ မြန်မာဘာသာ insight တွေ ရယူနိုင်သော web application
+  
 
 ---
 
@@ -20,6 +25,37 @@
 
 ---
 
+## Screenshots
+
+![login](./screenshots/login.png)
+![register](./screenshots/register.png)
+![dashboard](./screenshots/dashboard.png)
+![transactions](./screenshots/transactions.png)
+![reports](./screenshots/register.png)
+![categories](./screenshots/categories.png)
+![settings](./screenshots/settings.png)
+
+---
+
+| File | Page | Viewport | URL | Status |
+|------|------|----------|-----|--------|
+| `/screenshots/dashboard.png` | Dashboard | 1280×800 | `/` | ✅ |
+| `/screenshots/transactions.png` | Transactions | 1280×800 | `/transactions` | ✅ |
+| `/screenshots/reports.png` | Reports | 1280×800 | `/reports` | ✅ |
+| `/screenshots/categories.png` | Categories | 1280×800 | `/categories` | ✅ |
+| `/screenshots/settings.png` | Settings | 1280×800 | `/settings` | ✅ |
+| `/screenshots/login.png` | Login | 1280×800 | `/login` | ✅ |
+| `/screenshots/register.png` | Register | 1280×800 | `/login` | ✅ |
+
+
+
+---
+## User Guide 
+
+### ![User Guide Link](./userguide.html)
+### ![PDF Download Link](./userguide.pdf)
+
+---
 ## 🛠️ Tech Stack
 
 | Category | Tool |
