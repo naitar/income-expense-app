@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '@/store/AuthContext'
 import { Card, Button, Input } from '@/components/ui'
@@ -214,6 +214,11 @@ function Login() {
                   required: 'စကားဝှက် ထည့်ပါ။',
                 })}
               />
+              <div className="text-right -mt-2">
+                <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400">
+                  စကားဝှက် မမှတ်မိပါသလား?
+                </Link>
+              </div>
               <Button
                 type="submit"
                 variant="primary"
