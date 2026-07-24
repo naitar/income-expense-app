@@ -10,8 +10,11 @@ import Settings from '@/pages/Settings'
 import Login from '@/pages/Login'
 import ForgotPassword from '@/pages/ForgotPassword'
 import ResetPassword from '@/pages/ResetPassword'
+import useGoatCounter from '@/hooks/useGoatCounter'
 
 function App() {
+  useGoatCounter()
+
   return (
     <TransactionProvider>
       <Routes>
